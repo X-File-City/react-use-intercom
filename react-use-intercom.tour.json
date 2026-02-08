@@ -1,0 +1,294 @@
+{
+  "id": "react-use-intercom-onboarding",
+  "title": "react-use-intercom Codebase Tour",
+  "description": "Explore the architecture of react-use-intercom — a lightweight React hook library for Intercom integration. Learn how the monorepo is organized, how the Provider pattern works, and where tests and examples live.",
+  "version": "1.0.0",
+  "audience": "New Contributors & AI Assistants",
+  "prerequisites": [
+    "Basic React and TypeScript knowledge",
+    "Familiarity with React hooks and context"
+  ],
+  "steps": [
+    {
+      "id": "step-1-overview",
+      "title": "Project Overview",
+      "description": "Welcome to react-use-intercom! This is a monorepo powered by pnpm workspaces and Turborepo. The project provides a tiny (<3kB gzipped) React hook for integrating Intercom's messaging widget with full TypeScript support. The codebase is split into packages/ (the library itself) and apps/ (playground and framework examples).",
+      "estimatedTime": 30,
+      "colorMode": "fileTypes",
+      "focusDirectory": "",
+      "highlightLayers": [
+        {
+          "id": "monorepo-areas",
+          "name": "Monorepo Structure",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "packages", "type": "directory" },
+            { "path": "apps", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over packages/ to see the library source",
+          "target": "packages"
+        },
+        {
+          "type": "hover-directory",
+          "description": "Hover over apps/ to see the playground and examples",
+          "target": "apps"
+        }
+      ]
+    },
+    {
+      "id": "step-2-root-config",
+      "title": "Root Configuration",
+      "description": "The monorepo root contains workspace configuration: pnpm-workspace.yaml defines the workspace packages, turbo.json orchestrates build/test/lint pipelines, and eslint.config.js with .prettierrc.js enforce code style. The .changeset/ directory manages versioning and changelog generation for npm releases.",
+      "estimatedTime": 30,
+      "focusDirectory": "",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "root-config",
+          "name": "Workspace Config",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "pnpm-workspace.yaml", "type": "file" },
+            { "path": "turbo.json", "type": "file" },
+            { "path": "eslint.config.js", "type": "file" },
+            { "path": ".prettierrc.js", "type": "file" },
+            { "path": "package.json", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        },
+        {
+          "id": "changeset-config",
+          "name": "Changesets",
+          "color": "#10b981",
+          "items": [
+            { "path": ".changeset", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        }
+      ]
+    },
+    {
+      "id": "step-3-library-source",
+      "title": "Library Source Code",
+      "description": "The core library lives in packages/react-use-intercom/src/. The entry point is index.ts which exports IntercomProvider and useIntercom. The architecture follows the Provider + Hook pattern: provider.tsx wraps your app and manages the Intercom lifecycle, useIntercom.ts exposes context methods to any child component, and context.ts defines the React Context that connects them.",
+      "estimatedTime": 60,
+      "focusDirectory": "packages/react-use-intercom/src",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "provider-hook",
+          "name": "Provider + Hook",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "packages/react-use-intercom/src/index.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/src/provider.tsx", "type": "file" },
+            { "path": "packages/react-use-intercom/src/useIntercom.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/src/context.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        },
+        {
+          "id": "intercom-bridge",
+          "name": "Intercom Bridge",
+          "color": "#ef4444",
+          "items": [
+            { "path": "packages/react-use-intercom/src/api.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/src/initialize.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click index.ts to see the public API exports",
+          "target": "packages/react-use-intercom/src/index.ts"
+        },
+        {
+          "type": "click-file",
+          "description": "Click provider.tsx to see how IntercomProvider manages the widget lifecycle",
+          "target": "packages/react-use-intercom/src/provider.tsx"
+        }
+      ]
+    },
+    {
+      "id": "step-4-types-and-mappers",
+      "title": "Types & Prop Mapping",
+      "description": "types.ts is the largest source file (~536 lines) and defines every TypeScript interface — IntercomProps, IntercomContextValues, MessengerAttributes, and more. The library accepts camelCase props (e.g. userId) and mappers.ts converts them to Intercom's snake_case API format (user_id). utils.ts provides SSR detection and data cleaning helpers.",
+      "estimatedTime": 45,
+      "focusDirectory": "packages/react-use-intercom/src",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "types-mappers",
+          "name": "Types & Mappers",
+          "color": "#a855f7",
+          "items": [
+            { "path": "packages/react-use-intercom/src/types.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/src/mappers.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/src/utils.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click types.ts to explore the full type definitions",
+          "target": "packages/react-use-intercom/src/types.ts"
+        }
+      ]
+    },
+    {
+      "id": "step-5-testing",
+      "title": "Testing",
+      "description": "Unit tests live in packages/react-use-intercom/test/ and use Jest with ts-jest and jsdom. intercomProvider.test.tsx tests the Provider component and useIntercom.test.tsx tests the hook's methods. The library also uses tsup for building and enforces a 3kB size limit per output format.",
+      "estimatedTime": 30,
+      "focusDirectory": "packages/react-use-intercom",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "test-files",
+          "name": "Tests",
+          "color": "#22c55e",
+          "items": [
+            { "path": "packages/react-use-intercom/test", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "build-config",
+          "name": "Build Config",
+          "color": "#f97316",
+          "items": [
+            { "path": "packages/react-use-intercom/tsup.config.ts", "type": "file" },
+            { "path": "packages/react-use-intercom/jest.config.cjs", "type": "file" },
+            { "path": "packages/react-use-intercom/package.json", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over test/ to see the test files",
+          "target": "packages/react-use-intercom/test"
+        }
+      ]
+    },
+    {
+      "id": "step-6-playground",
+      "title": "Playground App",
+      "description": "The playground in apps/playground/ is a Vite-based React app that demonstrates every feature of the library. It uses React Router and Styled Components, with pages for different IntercomProvider configurations (autoBoot, events, API methods) and useIntercom examples (tours, delayed initialization). E2E tests run via Cypress.",
+      "estimatedTime": 45,
+      "focusDirectory": "apps/playground/src",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "playground-modules",
+          "name": "Demo Modules",
+          "color": "#06b6d4",
+          "items": [
+            { "path": "apps/playground/src/modules/provider", "type": "directory" },
+            { "path": "apps/playground/src/modules/useIntercom", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "playground-entry",
+          "name": "App Entry",
+          "color": "#ec4899",
+          "items": [
+            { "path": "apps/playground/src/app.tsx", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click app.tsx to see how the playground routes are configured",
+          "target": "apps/playground/src/app.tsx"
+        }
+      ]
+    },
+    {
+      "id": "step-7-examples",
+      "title": "Framework Examples",
+      "description": "The apps/examples/ directory contains integration examples for popular frameworks: Next.js App Router, Next.js Pages Router, Gatsby, and Vite. Each shows the correct way to set up IntercomProvider for that framework, including SSR/SSG considerations. These are valuable references for both users and contributors.",
+      "estimatedTime": 30,
+      "focusDirectory": "apps/examples",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "example-apps",
+          "name": "Framework Examples",
+          "color": "#6366f1",
+          "items": [
+            { "path": "apps/examples/nextjs-app-router", "type": "directory" },
+            { "path": "apps/examples/nextjs-page-router", "type": "directory" },
+            { "path": "apps/examples/gatsby", "type": "directory" },
+            { "path": "apps/examples/vite", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "explore",
+          "description": "Browse the different framework examples to see integration patterns"
+        }
+      ]
+    },
+    {
+      "id": "step-8-ci-cd",
+      "title": "CI/CD & Workflows",
+      "description": "GitHub Actions workflows in .github/workflows/ automate testing (main.yml, pull-request.yml), E2E tests (e2e-testing.yml), npm publishing via Changesets (release.yml), playground deployment to GitHub Pages (deploy.yml), and security analysis (codeql-analysis.yml). The full pipeline runs tests, lint, and build on every PR.",
+      "estimatedTime": 30,
+      "focusDirectory": ".github/workflows",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "ci-workflows",
+          "name": "CI/CD Workflows",
+          "color": "#f43f5e",
+          "items": [
+            { "path": ".github/workflows", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ]
+    },
+    {
+      "id": "step-9-recap",
+      "title": "Architecture Recap",
+      "description": "You've now seen the full architecture: a pnpm monorepo with the core library in packages/react-use-intercom (Provider + Hook pattern, full TypeScript types, camelCase-to-snake_case mapping, <3kB gzipped). The playground and four framework examples demonstrate usage. Tests, CI/CD, and Changesets keep the project healthy. Key commands: pnpm dev (develop), pnpm test (test), pnpm build (build), pnpm lint (lint).",
+      "estimatedTime": 15,
+      "focusDirectory": "",
+      "colorMode": "fileTypes"
+    }
+  ],
+  "metadata": {
+    "author": "Claude",
+    "createdAt": "2026-02-08",
+    "tags": ["onboarding", "architecture", "react", "intercom", "monorepo"]
+  }
+}
